@@ -1,0 +1,93 @@
+<div class="card" role="main" aria-label="Assets tracker">
+  <ng-container *ngIf="!showForm">
+    <div
+      class="card-content-center"
+      *ngIf="!combinedDisplayItems || combinedDisplayItems.length === 0; else showTable"
+      role="region"
+    >
+      <div aria-hidden="true">
+        <img src="assets/icon.png" alt="" />
+      </div>
+      <div id="cardTitle" class="font-bold-30" role="heading" aria-level="2">
+        No Assets
+      </div>
+      <p class="font-normal-23">
+        You currently don't have any Assets...
+      </p>
+      <div class="button-shell">
+        <button
+          class="base-button font-bold-26 green-button add-button"
+          (click)="toggleForm(true)"
+          type="button"
+          aria-label="Add new assets"
+          aria-describedby="cardTitle">
+          Add Assets
+        </button>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #showTable>
+    <div class="header font-bold-30" role="heading" aria-level="2">
+      <div class="title">
+        <img src="assets/icon.png" alt="Assets icon" />
+        <div>Assets</div>
+      </div>
+    </div>
+
+    <div class="table-container" role="region" aria-label="Assets list">
+      <table *ngIf="combinedDisplayItems.length > 0" role="table">
+        <tbody>
+          <tr *ngFor="let item of combinedDisplayItems; let i = index" class="asset-row" role="row">
+            <td role="cell" class="font-normal-30">{{ item.type }}</td>
+            <td role="cell" class="font-bold-30" aria-label="Value">
+              $ {{ item.value | number:'1.2-2' }}
+            </td>
+            <td role="cell" class="action-column">
+              <button
+                type="button"
+                class="delete-item"
+                (click)="deleteItem(i)"
+                aria-label="Delete asset">
+                🗑
+              </button>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr class="total-row" role="row">
+            <td role="cell" class="font-normal-30" scope="row">
+              TOTAL VALUE
+            </td>
+            <td role="cell" class="font-bold-30" aria-label="Total value">
+              $ {{ getTotal() | number:'1.2-2' }}
+            </td>
+            <td role="cell"></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <div class="footer">
+      <button
+        class="base-button font-bold-26 green-button add-button"
+        (click)="toggleForm(true)"
+        type="button"
+        aria-label="Add new assets"
+        *ngIf="combinedDisplayItems.length > 0"
+      >
+        Add Assets
+      </button>
+    </div>
+  </ng-template>
+
+  <ng-container *ngIf="showForm">
+    <app-asset-form
+      (save)="handleSave($event)"
+      (close)="toggleForm(false)"
+      class="asset-form"
+      role="form"
+      aria-labelledby="formTitle"
+    ></app-asset-form>
+  </ng-container>
+</div>

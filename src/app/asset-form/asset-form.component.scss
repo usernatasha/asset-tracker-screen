@@ -1,0 +1,138 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  button {
+    align-items: center;
+    border: none;
+    background-color: transparent;
+  }
+}
+
+.table-container {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 0;
+  background: #fff;
+
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: auto;
+
+    th {
+      padding: 20px 30px;
+      border-bottom: 1px solid #cccccc;
+    }
+
+    td {
+      padding: 20px 30px;
+    }
+
+    tr {
+      width: 100%;
+      display: table-row;
+    }
+
+    .type-column {
+      width: 50%;
+    }
+
+    .value-column {
+      width: 50%;
+    }
+
+    .action-column {
+      text-align: center;
+      padding-right: 30px;
+    }
+
+    select {
+      width: 100%;
+      height: 56px;
+      padding: 0 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+    }
+
+    .input-container {
+      position: relative;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      height: 56px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+
+      .dollar-symbol {
+        background-color: #f0f0f0;
+        color: #000000;
+        font-weight: bold;
+        padding: 0 20px;
+        height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #cccccc;
+        border-right: none;
+        user-select: none;
+      }
+
+      input {
+        flex-grow: 1;
+        height: 56px;
+        width: 100%;
+        padding: 0 16px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+      }
+    }
+  }
+
+  .quick-add {
+    padding: 20px 30px;
+    display: flex;
+    justify-content: flex-end;
+
+    .quick-add-button {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #56B059;
+      background: #fff;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      .plus-icon {
+        width: 30px;
+        border-radius: 50%;
+        background-color: #56B059;
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+      }
+
+      .text {
+        white-space: nowrap;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+.divider {
+  border-bottom: 1px solid #cccccc;
+  margin-bottom: 30px;
+}
+
+.invalid {
+  border: 2px solid red !important;
+}

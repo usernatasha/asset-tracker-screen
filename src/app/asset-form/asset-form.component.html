@@ -1,0 +1,107 @@
+<div class="header" role="banner" aria-label="Add Assets header">
+  <div class="title" role="heading" aria-level="1">
+    <img src="assets/icon.png" alt="Add Assets icon" />
+    <div class="font-bold-30">Add Assets</div>
+  </div>
+  <button
+    class="font-bold-30"
+    aria-label="Close Add Assets form"
+    (click)="onClose()">
+    X
+  </button>
+</div>
+
+<div class="divider" role="separator"></div>
+
+<form [formGroup]="assetForm" role="form" aria-labelledby="formTitle">
+  <div class="table-container" role="region" aria-label="Assets input table">
+    <table>
+      <thead>
+        <tr>
+          <th class="font-bold-23 type-column" scope="col">Type</th>
+          <th class="font-bold-23 value-column" scope="col">Value</th>
+          <th class="font-bold-23 action-column" scope="col"></th>
+        </tr>
+      </thead>
+      <tbody formArrayName="items">
+        <tr
+          class="font-normal-23 row-item"
+          *ngFor="let item of items.controls; let i = index"
+          [formGroupName]="i"
+          role="row">
+          <td class="type-column" role="cell">
+            <select
+              id="{{ 'type-' + i }}"
+              formControlName="type"
+              #typeInput
+              class="selection"
+              [ngClass]="{
+                invalid: item.get('type')?.invalid && item.get('type')?.touched
+              }">
+              <option disabled value="">– Select –</option>
+              <option *ngFor="let assetType of assetTypes" [value]="assetType">
+                {{ assetType }}
+              </option>
+            </select>
+          </td>
+
+          <td class="value-column" role="cell">
+            <div class="input-container">
+              <span class="dollar-symbol font-normal-23" aria-hidden="true">$</span>
+              <input
+                id="{{ 'value-' + i }}"
+                type="text"
+                formControlName="value"
+                #valueInput
+                (blur)="formatValueOnBlur(i)"
+                [ngClass]="{
+                  invalid: item.get('value')?.invalid && item.get('value')?.touched
+                }"/>
+            </div>
+          </td>
+
+          <td class="action-column" role="cell">
+            <button
+              type="button"
+              class="delete-button"
+              (click)="deleteItem(i)"
+              [disabled]="!hasChanges"
+              aria-label="Delete asset"
+            >
+              🗑
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="quick-add">
+      <button
+        type="button"
+        class="quick-add-button"
+        (click)="addItem()"
+        aria-label="Add another asset"
+      >
+        <span class="plus-icon font-bold-26" aria-hidden="true">+</span>
+        <span class="text font-bold-26">Add Another Asset</span>
+      </button>
+    </div>
+  </div>
+</form>
+
+<div class="footer">
+  <button
+    class="base-button font-bold-26"
+    (click)="onClose()"
+    aria-label="Close form without saving"
+  >
+    Close
+  </button>
+  <button
+    class="base-button font-bold-26 green-button"
+    (click)="onSave()"
+    aria-label="Save assets"
+  >
+    Save
+  </button>
+</div>
